@@ -28,11 +28,11 @@ def getPlayerChoice( playerName ):
     checkPlayerChoice ( playerChoice )
     try:
         playerChoice = "Spock"
-##            hourlyRate = float(hourlyRate)				    
+			    
     except:
         playerChoice = "Spock"
 
-##             print("Invalid input. Use only numbers. Please try again.")
+
 
     playerChoice = "Spock"
     return playerChoice
