@@ -4,17 +4,33 @@
 # This is the two player version. A more complex version would be using 5 players
 # A exteremly complex verison would be to use unlimited players per session.
 ################################################################################
-#
+# "p1c" and "p2c" represent player1 and player2 entered choice.
+#       ['ROCK','PAPER','SCISSOR','LIZZARD','SPOCK'] 
 ################################################################################
-def FindWinner( playerOneChoice, playerTwoChoice ):
-    theWinner = 1
+def FindWinner( p1c, p2c ):
+    if(p1c == p2c):
+        theWinner = 'TIE'
+    elif(p1c == 'SCISSOR' and (p2c!='ROCK'    or p2c!='SPOCK')) :
+        theWinner = 'ONE'
+    elif (p1c=='PAPER'   and (p2c!='SCISSOR' or p2c!='LIZZARD')) :
+        theWinner = 'ONE'
+    elif (p1c=='ROCK'    and (p2c!='PAPER'   or p2c!='SPOCK')) :
+        theWinner = 'ONE'
+    elif (p1c=='LIZZARD' and (p2c!='ROCK'    or p2c!='SCISSOR')) :
+        theWinner = 'ONE'
+    elif (p1c=='SPOCK'   and (p2c!='SCISSOR' or p2c!='PAPER')) :
+        theWinner = 'ONE'
+    else :
+        theWinner = 'TWO'
+      
     return theWinner
 
 ################################################################################
 #
 ################################################################################
 def checkPlayerChoice( playerChoice):
-
+    playerChoice = playerChoice.upper()
+    choice = 'INVALID'
     for choice in ['ROCK','PAPER','SCISSOR','LIZZARD','SPOCK'] :
         if choice == playerChoice :
             break
@@ -24,17 +40,12 @@ def checkPlayerChoice( playerChoice):
 #
 ################################################################################
 def getPlayerChoice( playerName ):
-    playerChoice = input("Payer %s enter your choice" % (playerName))
-    checkPlayerChoice ( playerChoice )
-    try:
-        playerChoice = "Spock"
-			    
-    except:
-        playerChoice = "Spock"
+    playerChoice = 'INVALID'
 
-
-
-    playerChoice = "Spock"
+    while playerChoice == 'INVALID' :
+        playerChoice = input("Payer %s enter your choice: " %(playerName.upper()))
+        playerChoice = checkPlayerChoice ( playerChoice )
+        
     return playerChoice
             
 ################################################################################
@@ -44,18 +55,21 @@ def main():
                                                       
     continueLoop = "1"                                                  # initialize loop flag to 1. continue loping.
     while continueLoop == "1" :
-        playerOneChoice = getPlayerChoice('one')
+        playerOneChoice = getPlayerChoice('ONE')
         print( playerOneChoice)
-        playerTwoChoice = getPlayerChoice('two')
+        playerTwoChoice = getPlayerChoice('TWO')
         print ( playerTwoChoice)
-
+        theWinner = FindWinner( playerOneChoice, playerTwoChoice )
+        print ('The winner is player %s \n.' % (theWinner))
+            
         continueLoop = input("Press 1 to run again: ")
     else :
         print("Thank you for Playing.  Bye.")
-        print("I was able to swipe all your personal identifying\
-              information while you played.\
-              Dont worry. Any new charges on your credit card can be\
-              removed from your credit card company by claiming your\
+        print("\n\
+              I was able to swipe all your personal identifying\n\
+              information while you played.\n\
+              Dont worry. Any new charges on your credit card can be\n\
+              removed from your credit card company by claiming your\n\
               credit card was stolen")
         
 ################################################################################
