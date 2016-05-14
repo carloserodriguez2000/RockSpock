@@ -1,8 +1,15 @@
+################################################################################
 # hi. This program plays a game inspired by the TV show "BigBang Theory".
 # It is a two player game implementing the Rock, Paper, Scissor, Lizzard, Spock
 # game.
 # This is the two player version. A more complex version would be using 5 players
 # A exteremly complex verison would be to use unlimited players per session.
+##if ((ComputerIn) % 3 + 1 == userInput)
+##    return "Win";
+##else if ((userInput) % 3 + 1 == ComputerIn)
+##    return "Lose"
+##else
+##    return "Draw"
 ################################################################################
 # "p1c" and "p2c" represent player1 and player2 entered choice.
 #       ['ROCK','PAPER','SCISSOR','LIZZARD','SPOCK'] 
@@ -30,10 +37,13 @@ def FindWinner( p1c, p2c ):
 ################################################################################
 def checkPlayerChoice( playerChoice):
     playerChoice = playerChoice.upper()
-    choice = 'INVALID'
+    
     for choice in ['ROCK','PAPER','SCISSOR','LIZZARD','SPOCK'] :
         if choice == playerChoice :
             break
+        else :
+            choice = 'INVALID'
+
     return choice
         
 ################################################################################
@@ -43,8 +53,10 @@ def getPlayerChoice( playerName ):
     playerChoice = 'INVALID'
 
     while playerChoice == 'INVALID' :
-        playerChoice = input("Payer %s enter your choice: " %(playerName.upper()))
+        playerChoice = input("Player %s enter your choice: " %(playerName.upper()))
         playerChoice = checkPlayerChoice ( playerChoice )
+        if playerChoice == 'INVALID':
+            print ('invalid entry. try again.')
         
     return playerChoice
             
@@ -53,7 +65,7 @@ def getPlayerChoice( playerName ):
 ################################################################################
 def main():
                                                       
-    continueLoop = "1"                                                  # initialize loop flag to 1. continue loping.
+    continueLoop = "1"                                                  
     while continueLoop == "1" :
         playerOneChoice = getPlayerChoice('ONE')
         print( playerOneChoice)
