@@ -47,14 +47,18 @@ def checkPlayerChoice( playerChoice):
     return choice
         
 ################################################################################
-#
+# NOTE: the os.system('cls') does not behave the same when run in IDLE. To
+# see the clear screen feature, it has to be run in the command prompt window.
+# ex "python main.py"
 ################################################################################
+from os import system
 def getPlayerChoice( playerName ):
     playerChoice = 'INVALID'
 
     while playerChoice == 'INVALID' :
         playerChoice = input("Player %s enter your choice: " %(playerName.upper()))
         playerChoice = checkPlayerChoice ( playerChoice )
+        system('cls')
         if playerChoice == 'INVALID':
             print ('invalid entry. try again.')
         
@@ -63,15 +67,16 @@ def getPlayerChoice( playerName ):
 ################################################################################
 #
 ################################################################################
+
 def main():
                                                       
     continueLoop = "1"                                                  
     while continueLoop == "1" :
         playerOneChoice = getPlayerChoice('ONE')
-        print( playerOneChoice)
         playerTwoChoice = getPlayerChoice('TWO')
-        print ( playerTwoChoice)
         theWinner = FindWinner( playerOneChoice, playerTwoChoice )
+        print ( 'Player ONE choice is %s' % (playerOneChoice))
+        print ( 'Player TWO choice is %s' % (playerTwoChoice))
         print ('The winner is player %s \n.' % (theWinner))
             
         continueLoop = input("Press 1 to run again: ")
